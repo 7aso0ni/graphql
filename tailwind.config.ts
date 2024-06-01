@@ -14,19 +14,20 @@ const config: Config = {
         "primary-dark-bg": "#0d1117",
         "primary-dark-accent": "#161b22",
         "primary-dark-foreground": "#21262d",
+        "neutral-light": "#ecf2f8",
 
         // Secondary Colors, Primary Element Colors
         "secondary-red": "#fa7970",
         "secondary-orange": "#faa356",
         "secondary-green": "#7ce38b",
-        "secondary-blue": "#a2d2fb",
-        "secondary-blue-light": "#77bdfb",
-        "secondary-purple": "#cea5fb",
+        "secondary-blue": "#1f6feb",
+        "secondary-blue-light": "#4186ff",
+        "secondary-purple": "#D73BD4",
+        "secondary-purple-light": "#E773E5",
 
         // Neutral Colors, Primary Text Colors
-        "neutral-gray-dark": "#89929b",
-        "neutral-gray-light": "#c6cdd5",
-        "neutral-light": "#ecf2f8",
+        "text-neutral-dark": "#89929b",
+        "text-neutral-light": "#c6cdd5",
       },
 
       backgroundImage: {
