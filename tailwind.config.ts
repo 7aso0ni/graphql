@@ -9,9 +9,17 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      borderRadius: {
+        "r-75": "0 72px 0 0",
+      },
+
+      backgroundColor: {
+        primary: "#202124",
+      },
+
       colors: {
         // Primary Colors
-        "primary-dark-bg": "#0d1117",
+        "primary-dark-bg": "#202124",
         "primary-dark-accent": "#161b22",
         "primary-dark-foreground": "#21262d",
         "neutral-light": "#ecf2f8",
@@ -23,7 +31,7 @@ const config: Config = {
         "secondary-blue": "#1f6feb",
         "secondary-blue-light": "#4186ff",
         "secondary-purple": "#D73BD4",
-        "secondary-purple-light": "#E773E5",
+        "secondary-purple-light": "#7875B5",
 
         // Neutral Colors, Primary Text Colors
         "text-neutral-dark": "#89929b",
