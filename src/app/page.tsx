@@ -47,8 +47,9 @@ export default function Login() {
         throw new Error(error.error);
       }
 
-      const token: string | undefined = await response.json();
+      const token: string = await response.json();
       if (token) setAccessToken(token);
+      localStorage.setItem("tempSession", token);
     } catch (error) {
       setShowPopUpMessage(true);
       if (typeof error === "string") setErrorMessage(error);
