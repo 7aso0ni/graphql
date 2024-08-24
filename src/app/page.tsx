@@ -2,6 +2,8 @@
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useAppContext } from "./context.tsx";
 import {
   faEye,
   faEyeSlash,
@@ -12,34 +14,70 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 export default function Login() {
+  const { setAccessToken } = useAppContext();
   const [identifier, setIdentifier] = useState<String>("");
   const [password, setPassword] = useState<String>("");
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [showPopUpMessage, setShowPopUpMessage] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<String>("");
+  const router = useRouter();
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
       if (identifier.trim() === "" || password.trim() === "")
         throw new Error("Please fill in all the fields");
 
-      // convert data into json object
-      const jsonData = JSON.stringify({ identifier, password });
+      // encode the credentials into base64
+      const credentials = btoa(`${identifier}:${password}`);
+      const response = await fetch(
+        "https://learn.reboot01.com/api/auth/signin",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Basic ${credentials}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
-      //TODO: get session cookie from 01
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.error);
+      }
+
+      const token: string | undefined = await response.json();
+      if (token) setAccessToken(token);
     } catch (error) {
-      console.log(error);
       setShowPopUpMessage(true);
       if (typeof error === "string") setErrorMessage(error);
       else if (error instanceof Error) setErrorMessage(error.message);
       else setErrorMessage("An unexpected error happened");
+      return;
     }
+
+    // navigate to a different page without reloading
+    // if no error was found redirect
+    router.push("/home");
   };
 
   return (
     <div className="flex justify-center items-center min-h-screen">
+      {showPopUpMessage && (
+        <div className="w-auto h-auto py-3 px-5 bg-red-400 absolute top-4 duration-200 rounded text-white">
+          <span className="relative justify-between">
+            {errorMessage}
+            <FontAwesomeIcon
+              onClick={() => {
+                setShowPopUpMessage(false);
+              }}
+              icon={faX}
+              className="cursor-pointer pl-4"
+            />
+          </span>
+        </div>
+      )}
       <div className="rounded-md [background:linear-gradient(90deg,#5D54A4,#7C78B8)] relative h-[600px] w-[360px] shadow-sm">
         <div className="z-10 relative h-full ">
           <form className="p-[30px] pt-[156px] w-80" onSubmit={handleSubmit}>
