@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css"; // Import the CSS
-import { AppProvider } from "./context.tsx";
 
 config.autoAddCss = false; // Tell Font Awesome to skip adding the CSS automatically since it's already imported
 import "./globals.css";
@@ -22,9 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-primary`}>
-        <AppProvider>{children}</AppProvider>
-      </body>
+      <body className={`${inter.className} bg-primary`}>{children}</body>
     </html>
   );
 }

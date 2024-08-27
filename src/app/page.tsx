@@ -3,7 +3,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useAppContext } from "./context.tsx";
 import {
   faEye,
   faEyeSlash,
@@ -14,7 +13,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 export default function Login() {
-  const { setAccessToken } = useAppContext();
   const [identifier, setIdentifier] = useState<String>("");
   const [password, setPassword] = useState<String>("");
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -48,8 +46,7 @@ export default function Login() {
       }
 
       const token: string = await response.json();
-      if (token) setAccessToken(token);
-      localStorage.setItem("tempSession", token);
+      if (token) localStorage.setItem("tempSession", token);
     } catch (error) {
       setShowPopUpMessage(true);
       if (typeof error === "string") setErrorMessage(error);

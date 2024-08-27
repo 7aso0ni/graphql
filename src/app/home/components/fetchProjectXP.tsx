@@ -8,7 +8,7 @@ interface XP {
 
 interface result {
   login: string;
-  projects: XP[];
+  xps: XP[];
 }
 
 export function ProjectXP({ accessToken }: { accessToken: string | null }) {
@@ -16,6 +16,7 @@ export function ProjectXP({ accessToken }: { accessToken: string | null }) {
     chart: {
       id: "basic-line",
     },
+    colors: ["#8839ef"],
     xaxis: {
       categories: [],
       tickPlacement: "on",
@@ -77,7 +78,7 @@ export function ProjectXP({ accessToken }: { accessToken: string | null }) {
         }
 
         const data = await response.json();
-        const result = data.data.user[0];
+        const result: result = data.data.user[0];
 
         setOptions((prevOptions: any) => ({
           ...prevOptions,
@@ -101,8 +102,11 @@ export function ProjectXP({ accessToken }: { accessToken: string | null }) {
   }, [accessToken]);
 
   return (
-    <div className="w-[55%] bg-[#333335] p-4 rounded m-4">
-      <Chart options={options} series={series} type="line" width={800} />
-    </div>
+    <Chart
+      options={options}
+      series={series}
+      type="line"
+      className="w-[45%] bg-[#333335] p-4 rounded m-4"
+    />
   );
 }
