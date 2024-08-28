@@ -28,7 +28,7 @@ export function ProjectXP({ accessToken }: { accessToken: string | null }) {
         show: true,
         style: {
           fontSize: "11px",
-          colors: "#fff",
+          colors: "#fff", // Use a string for a single color
         },
       },
     },
@@ -36,7 +36,7 @@ export function ProjectXP({ accessToken }: { accessToken: string | null }) {
       labels: {
         style: {
           fontSize: "11px",
-          colors: "#fff",
+          colors: "#fff", // Use a string for a single color
         },
       },
     },
@@ -45,6 +45,32 @@ export function ProjectXP({ accessToken }: { accessToken: string | null }) {
     },
   });
   const [series, setSeries] = useState<any>([]);
+
+  useEffect(() => {
+    setOptions((prevOptions: any) => ({
+      ...prevOptions,
+      xaxis: {
+        ...prevOptions.xaxis,
+        labels: {
+          ...prevOptions.xaxis.labels,
+          style: {
+            ...prevOptions.xaxis.labels.style,
+            colors: "#fff", // Ensuring color is white
+          },
+        },
+      },
+      yaxis: {
+        ...prevOptions.yaxis,
+        labels: {
+          ...prevOptions.yaxis.labels,
+          style: {
+            ...prevOptions.yaxis.labels.style,
+            colors: "#fff", // Ensuring color is white
+          },
+        },
+      },
+    }));
+  }, []);
 
   useEffect(() => {
     (async () => {
