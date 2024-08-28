@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { ProjectXP } from "./components/fetchProjectXP";
 import { FetchAuditRatio } from "./components/fetchAuditRatio";
 import { AuditorLogin } from "./components/fetchAuditorLogin";
+import Link from "next/link";
 
 export default function Home() {
   const router = useRouter();
@@ -51,9 +52,17 @@ export default function Home() {
 
   return (
     <div className="overflow-x-hidden items-center flex flex-col">
-      <div className="w-full bg-[#333335] h-12 flex justify-end items-center text-white">
-        {/* <span className="mr-2">{username}</span> */}
+      <div className="w-full bg-[#333335] h-12 flex justify-between items-center text-white px-4">
+        <span className="text-lg font-semibold ml-11">{username}</span>
+        <Link
+          onClick={() => localStorage.removeItem("tempSession")}
+          href="/"
+          className="hover:text-gray-300 transition-colors duration-200 mr-11"
+        >
+          Logout
+        </Link>
       </div>
+
       <div className="flex justify-around w-full">
         <ProjectXP accessToken={accessToken} />
         <FetchAuditRatio accessToken={accessToken} />

@@ -16,7 +16,6 @@ export function ProjectXP({ accessToken }: { accessToken: string | null }) {
     chart: {
       id: "basic-line",
     },
-    colors: ["#8839ef"],
     xaxis: {
       categories: [],
       tickPlacement: "on",

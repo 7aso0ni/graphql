@@ -51,28 +51,26 @@ export function AuditorLogin({ accessToken }: { accessToken: string | null }) {
   }, [accessToken]);
 
   return (
-    <div className="w-[92.5%] text-white bg-[#333335] h-[500px] overflow-auto w-custom-scrollbar">
-      {auditors.map((auditor, idx) =>
-        auditor.grade < 1 ? (
-          <div key={idx} className="w-full p-2 flex justify-around">
-            <div className="px-4 flex justify-center items-center">
-              <div>{auditor.auditorLogin}</div>
-            </div>
-            <div className="px-4 flex justify-center items-center">
-              <div className="text-red-400">FAIL</div>
-            </div>
+    <div className="w-[92.5%] text-white bg-[#333335] h-[500px] overflow-auto custom-scrollbar">
+      <div className="w-full p-2 flex justify-around font-bold border-b border-gray-600">
+        <div className="w-1/2 text-center">Auditor Name</div>
+        <div className="w-1/2 text-center">Status</div>
+      </div>
+      {auditors.map((auditor, idx) => (
+        <div
+          key={idx}
+          className="w-full p-2 flex justify-around border-b border-gray-600"
+        >
+          <div className="w-1/2 text-center">{auditor.auditorLogin}</div>
+          <div
+            className={`w-1/2 text-center ${
+              auditor.grade < 1 ? "text-red-400" : "text-green-400"
+            }`}
+          >
+            {auditor.grade < 1 ? "FAIL" : "PASS"}
           </div>
-        ) : (
-          <div key={idx} className="w-full p-2 flex justify-around ">
-            <div className="px-4 flex justify-center items-center">
-              <div>{auditor.auditorLogin}</div>
-            </div>
-            <div className="px-4 flex justify-center items-center">
-              <div className="text-green-400">PASS</div>
-            </div>
-          </div>
-        )
-      )}
+        </div>
+      ))}
     </div>
   );
 }

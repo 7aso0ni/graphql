@@ -17,7 +17,6 @@ export function FetchAuditRatio({
       id: "pie-chart",
     },
     labels: ["Total Up", "Total Down"],
-    colors: ["#ea76cb", "#8839ef"],
     dataLabels: {
       style: {
         colors: ["#fff"], // Custom colors for the labels
