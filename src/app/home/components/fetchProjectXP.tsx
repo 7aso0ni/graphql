@@ -1,5 +1,10 @@
+"use client";
+
 import React, { useState, useEffect } from "react";
-import Chart from "react-apexcharts";
+import dynamic from "next/dynamic";
+
+// Dynamically import the Chart component from ApexCharts
+const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 interface XP {
   path: string;

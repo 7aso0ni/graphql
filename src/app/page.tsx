@@ -3,6 +3,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import { setCookie } from "nookies";
 import {
   faEye,
   faEyeSlash,
@@ -46,7 +47,11 @@ export default function Login() {
       }
 
       const token: string = await response.json();
-      if (token) localStorage.setItem("tempSession", token);
+      if (token)
+        setCookie(null, "tempSession", token, {
+          maxAge: 24 * 60 * 60,
+          path: "/",
+        });
     } catch (error) {
       setShowPopUpMessage(true);
       if (typeof error === "string") setErrorMessage(error);
