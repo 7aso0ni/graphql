@@ -110,7 +110,7 @@ export function ProjectXP({ accessToken }: { accessToken: string | null }) {
       options={options}
       series={series}
       type="line"
-      className="w-[45%] bg-[#333335] p-4 rounded m-4"
+      className="w-[45%] bg-[#333335] p-4 rounded m-4 text-white"
     />
   );
 }
