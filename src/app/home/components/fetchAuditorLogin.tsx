@@ -7,15 +7,22 @@ interface AuditResult {
   grade: number;
 }
 
-export function AuditorLogin({ accessToken }: { accessToken: string | null }) {
+interface AuditorLoginProps {
+  accessToken: string | null;
+  username: string;
+}
+
+export function AuditorLogin({ accessToken, username }: AuditorLoginProps) {
   const [auditors, setAuditors] = useState<AuditResult[]>([]);
   useEffect(() => {
+    if (!username) return;
     (async () => {
+      console.log(username);
       const query = `
     {
       audit(
         where: {
-          auditorLogin: { _neq: "halmakan" },
+          auditorLogin: { _neq: ${username} },
           _and: { grade: { _gte: 0 } }
         }
       ) {
@@ -39,7 +46,6 @@ export function AuditorLogin({ accessToken }: { accessToken: string | null }) {
 
         const data = await response.json();
         const auditors = data.data.audit;
-
         const auditorsResult: AuditResult[] = [];
         auditors.forEach((auditor: AuditResult) => {
           auditorsResult.push(auditor);
@@ -50,7 +56,7 @@ export function AuditorLogin({ accessToken }: { accessToken: string | null }) {
         console.log(error);
       }
     })();
-  }, [accessToken]);
+  }, [accessToken, username]);
 
   return (
     <div className="w-[92.5%] text-white bg-[#333335] h-[500px] overflow-auto custom-scrollbar">

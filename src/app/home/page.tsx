@@ -68,7 +68,7 @@ export default function Home() {
         <ProjectXP accessToken={accessToken} />
         <FetchAuditRatio accessToken={accessToken} />
       </div>
-      <AuditorLogin accessToken={accessToken} />
+      <AuditorLogin accessToken={accessToken} username={username} />
     </div>
   );
 }
