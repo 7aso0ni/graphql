@@ -6,6 +6,8 @@ import { ProjectXP } from "./components/fetchProjectXP";
 import { parseCookies, destroyCookie } from "nookies";
 import { FetchAuditRatio } from "./components/fetchAuditRatio";
 import { AuditorLogin } from "./components/fetchAuditorLogin";
+import { UserSkills } from "./components/fetchUserSkills";
+
 import Link from "next/link";
 
 export default function Home() {
@@ -68,6 +70,7 @@ export default function Home() {
         <ProjectXP accessToken={accessToken} />
         <FetchAuditRatio accessToken={accessToken} />
       </div>
+      <UserSkills accessToken={accessToken} />
       <AuditorLogin accessToken={accessToken} username={username} />
     </div>
   );

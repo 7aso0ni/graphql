@@ -25,10 +25,10 @@ export function ProjectXP({ accessToken }: { accessToken: string | null }) {
       categories: [],
       tickPlacement: "on",
       labels: {
-        show: true,
+        show: false,
         style: {
           fontSize: "11px",
-          colors: "#fff", // Use a string for a single color
+          colors: "", // Use a string for a single color
         },
       },
     },
@@ -42,6 +42,12 @@ export function ProjectXP({ accessToken }: { accessToken: string | null }) {
     },
     markers: {
       size: 5,
+    },
+    tooltip: {
+      theme: "dark",
+      style: {
+        colors: ["#000"],
+      },
     },
   });
   const [series, setSeries] = useState<any>([]);
