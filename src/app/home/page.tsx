@@ -17,6 +17,7 @@ export default function Home() {
   const [username, setUsername] = useState<string>("");
 
   useEffect(() => {
+    if (!accessToken) router.push("/");
     const query = `
     {
       user {
